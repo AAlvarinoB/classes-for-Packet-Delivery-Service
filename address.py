@@ -107,7 +107,7 @@ class Address(object):
             :returns: string address
             :rtype: str
         """
-        return 'id = ({0}), city = ({1}), neighborhood = ({2}), street = ({3}), address number = ({4})'.format(self._id_address, self._city, self._neighborhood, self._street, self._address_num)
+        return 'id = {0}, city = ({1}), neighborhood = ({2}), street = ({3}), address number = ({4})'.format(self._id_address, self._city, self._neighborhood, self._street, self._address_num)
     
     def __eq__(self, other: 'Address') -> bool:
         """ returns boolean value of equivalence between two overweight packages
