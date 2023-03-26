@@ -83,9 +83,39 @@ class Person(object):
         """
         self._contact_num = contact_num
 
-    def __str__(self):
+    def __str__(self) -> str:
         """ returns str of person
             :returns: string person
             :rtype: str
         """
-        return 'id = ({0}), nombre = ({1}), apellido = ({2}), num_contacto = ({3})'.format(self._id_person, self._name, self._last_name, self._contact_num)
+        return 'id = ({0}), name = ({1}), last name = ({2}), contact number = ({3})'.format(self._id_person, self._name, self._last_name, self._contact_num)
+
+    def __eq__(self, other) -> bool:
+        """ returns boolean value of equivalence between two persons
+            :param other: another person to compare
+            :type: Person
+            :returns: true or false
+            :rtype: bool
+        """
+        if(isinstance(other, Person)):
+            return self._id_person == other._id_person and self._name == other._name and self._last_name == other._last_name and self._contact_num == other._contact_num
+        else:
+            return False
+        
+if __name__ == '__main__':
+
+    #Empty object
+    Empty_Person = Person()
+    print(Empty_Person)
+
+    #Object with custom parameters
+    New_Person = Person(1,'Bruce','Wayne','123456789')
+    print(New_Person)
+
+    #Equality between persons
+    AnotherEmptyPerson = Person()
+    if(Empty_Person == AnotherEmptyPerson):
+        print('These persons are the same')
+    else:
+        print('These persons are not the same')
+            

@@ -102,9 +102,39 @@ class Address(object):
         """
         self._address_num = address_num
 
-    def __str__(self):
+    def __str__(self) -> str:
         """ returns str of address
             :returns: string address
             :rtype: str
         """
-        return 'id = ({0}), ciudad = ({1}), barrio = ({2}), calle = ({3}), numero = ({4})'.format(self._id_address, self._city, self._neighborhood, self._street, self._address_num)
+        return 'id = ({0}), city = ({1}), neighborhood = ({2}), street = ({3}), address number = ({4})'.format(self._id_address, self._city, self._neighborhood, self._street, self._address_num)
+    
+    def __eq__(self, other: 'Address') -> bool:
+        """ returns boolean value of equivalence between two overweight packages
+            :param other: another overweight package to compare
+            :type: Address
+            :returns: true or false
+            :rtype: bool
+        """
+        if(isinstance(other,Address)):
+            return self._id_address == other._id_address and self._city == other._city and self._neighborhood == other._neighborhood and self._street == other._street and self._address_num == other._address_num
+        else:
+            return False
+        
+
+if __name__ == '__main__':
+
+    #Empty object
+    Empty_Address = Address()
+    print(Empty_Address)
+
+    #Object with custom parameters
+    New_Address = Address(1,'Gotham City','Crime Alley','Park Row','4')
+    print(New_Address)
+
+    #Equality between Addresses
+    AnotherEmptyAddress = Address()
+    if(Empty_Address == AnotherEmptyAddress):
+        print('These addresses are the same')
+    else:
+        print('These addresses are not the same')

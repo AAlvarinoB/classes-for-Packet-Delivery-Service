@@ -2,6 +2,14 @@ from package import Package
 """
 gives access to class Package
 """
+from standardpackage import StandardPackage
+"""
+gives access to class StandardPackage
+"""
+from overweightpackage import OverweightPackage
+"""
+gives access to class OverweightPackage
+"""
 from person import Person
 """
 gives access to class Person
@@ -172,13 +180,42 @@ class Deliver(object):
         """
         self._item = item
 
-    def __str__(self):
+    def __str__(self) -> str:
         """ returns str of deliver
             :returns: string deliver
             :rtype: str
         """
 
-        return 'id = ({0})\nfecha = ({1})\nhora = ({2})\nenviador = ({3})\nrecibidor = ({4})\ndireccion enviador = ({5})\ndireccion recibidor = ({6})\ncontacto = ({7})\npaquete = ({8})'.format(self._id_deliver, self._date, self._time, self._sender, self._reciver, self._sender_add, self._reciver_add, self._contact, self._item)
+        return 'id = ({0})\ndate = ({1})\nhour = ({2})\nsender = ({3})\nreciver = ({4})\nsender address = ({5})\nreciver address = ({6})\ncontact = ({7})\npackage = ({8})'.format(self._id_deliver, self._date, self._time, self._sender, self._reciver, self._sender_add, self._reciver_add, self._contact, self._item)
+
+    def __eq__(self, other: 'Deliver') -> bool:
+        """ returns boolean value of equivalence between two deliveries
+            :param other: another person to compare
+            :type: deliver
+            :returns: true or false
+            :rtype: bool
+        """
+        if(isinstance(other,Deliver)):
+            return self._id_deliver == other._id_deliver and self._date == other._date and self._time == other._time and self._sender == other._sender and self._reciver == other._reciver and self._sender_add == other._sender_add and self._reciver_add == other._reciver_add and self._contact == other._contact and self._item == other._item
+        else:
+            return False
+        
+if __name__ == '__main__':
+
+    #Empty object
+    Empty_Deliver = Deliver()
+    print(Empty_Deliver)
+
+    #Object with custom parameters
+    New_Deliver = Deliver(45,[21,3,2023],[6,0], Person('123456789','TestName1','TestLastName1','300000000'), Person('987654321','TestName2','TestLastName2','2000000000'), Address(5,'TestCity1','TestNeighborhood1','TestStreet1','TestAddressNumber1'), Address(10,'TestCity2','TestNeighborhood2','TestStreet2','TestAddressNumber2'), Person('30','TestContactName','TestContactLastName','1000000000'), OverweightPackage(1,50,'whatever a package may have lol'))
+    print(New_Deliver)
+
+    #Equality between persons
+    AnotherEmptyDeliver = Deliver()
+    if(Empty_Deliver == AnotherEmptyDeliver):
+        print('These deliveries are the same')
+    else:
+        print('These deliveries are not the same')
 
 
     

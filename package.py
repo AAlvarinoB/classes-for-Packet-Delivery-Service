@@ -33,7 +33,7 @@ class Package(object):
             :returns: id_package
             :rtype: int
         """
-        return self._id_package
+        return self.__id_package
 
 
     @id_package.setter
@@ -42,7 +42,7 @@ class Package(object):
             :param id_package: id of package
             :type: int
         """
-        self._id_package = id_package
+        self.__id_package = id_package
 
     @property
     def weight(self) -> float:
@@ -50,7 +50,7 @@ class Package(object):
             :returns: weight
             :rtype: float
         """
-        return self._weight
+        return self.__weight
 
     @weight.setter
     def weight(self, weight : float):
@@ -58,10 +58,8 @@ class Package(object):
             :param weight: weight of package
             :type: float
         """
-        if(weight <= 0.0):
-            self._weight = weight
-        else:
-            self._weight = 0.0
+        self.__weight = weight
+
 
     @property
     def description(self) -> str:
@@ -69,7 +67,7 @@ class Package(object):
             :returns: description
             :rtype: str
         """
-        return self._description
+        return self.__description
 
     @description.setter
     def description(self, description : str):
@@ -77,7 +75,7 @@ class Package(object):
             :param description: description of package
             :type: str
         """
-        self._description = description
+        self.__description = description
 
     @property
     def cost(self) -> float:
@@ -85,7 +83,7 @@ class Package(object):
             :returns: cost
             :rtype: float
         """
-        return self._cost
+        return self.__cost
     
     #Methods
     
@@ -97,10 +95,39 @@ class Package(object):
         """
         pass
     
-    def __str__(self):
+    def __str__(self) -> str:
         """ returns str of the package
             :returns: string package
             :rtype: str
         """
-        return 'id = ({0}), peso = ({1}), descripcion = ({2}), costo = ({3})'.format(self._id_package, self._weight, self._description, self._cost)
-       
+        return 'id = ({0}), weight = ({1}), description = ({2}), cost = ({3})'.format(self._id_package, self._weight, self._description, self._cost)
+    
+    def __eq__(self, other: 'Package') -> bool:
+        """ returns boolean value of equivalence between two packages
+            :param other: Another package to comparate
+            :type: Package
+            :returns: true or false
+            :rtype: bool
+        """
+        if (isinstance(other, Package)):
+            return self._id_package == other._id_package and self._weight == other._weight and self._description == other._description
+        else:
+            return False
+        
+if __name__ == '__main__':
+
+    #Empty object
+    Empty_Package = Package()
+    print(Empty_Package)
+
+    #Object with custom parameters
+    New_Package = Package(1, 2.0, 'random content of a package')
+    print(New_Package)
+
+    #Equality between packages
+    AnotherEmptyPackage = Package()
+
+    if(Empty_Package == AnotherEmptyPackage):
+        print('These are the same package.')
+    else:
+        print('These are not the same package')
